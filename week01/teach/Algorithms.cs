@@ -42,6 +42,7 @@ public static class Algorithms {
 
         return count;
     }
+    // <Guess> O(n)
 
     /// <summary>
     /// The count variable is keeping track of the amount
@@ -57,6 +58,7 @@ public static class Algorithms {
 
         return count;
     }
+    // <Guess> O(n)
 
     /// <summary>
     /// The count variable is keeping track of the amount
@@ -77,3 +79,4 @@ public static class Algorithms {
         return count;
     }
 }
+    //<Guess> O(n^2)
