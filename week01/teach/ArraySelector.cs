@@ -11,7 +11,7 @@ public static class ArraySelector
         var l3 = new[] { 'A', 'A', 'A', 'A', 'A'};
         var l4 = new[] { 'B', 'B', 'B', 'B', 'B'};
         select = new[] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
-        var charResult = ListSelector(13, 14, select);
+        var charResult = ListSelector(l3, l4, select);
         Console.WriteLine("<char[]>{" + string.Join(", ", charResult) + "}");
     }
 
