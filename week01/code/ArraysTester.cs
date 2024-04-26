@@ -35,11 +35,22 @@ public static class ArraysTester {
     private static double[] MultiplesOf(double number, int length)
     {
         // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        // Instructions for how to implement MultiplesOf function:
+        // The first thing we need to do is create an array where we will store the multiples when they are calculated.
+        // The next step would be, calculating the multiples for the number given. A for loop should loop through the varying lengths well.
+        // In each step of the for loop, we will want to multiply the given number by the index in the multiple. This will give us our multiple stored in the array.
+        // To finish off, we will need to print the array to show the user the multiples of the numbers.
+
+        // establish array
+        double[] multiples = new double[length];
+        // for loop to loop through and create & store multiples
+        for (int i = 0; i < length; i++)
+        {
+            multiples[i] = number * (i + 1); // calculates multiples
+        }
+
+        return multiples; // retrun the array
     }
     
     /// <summary>
@@ -53,9 +64,27 @@ public static class ArraysTester {
     private static void RotateListRight(List<int> data, int amount)
     {
         // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+
+        // What we want to start with here is evaluating the amount to ensure we have a distance to move the list.
+        // Then we want to identify the amount we have to rotate the data by taking the amount away from our count.
+        // We then need to use in this case, GetRange to select the amount of elements from the data list that we will move to the front as the rotational movement. 
+        // RemoveRange is how we will extract them once selected
+        // Finally, we will insert the selected elements using InsertRange and put them at the beginning of the list so the rest moves to the end. 
+        if (amount <= 0 || data.Count == 0)
+        {
+            return; // No need to rotate
+        }
+
+        // Calculate rotation amount
+        int effectiveAmount = amount % data.Count;
+
+        // Extract the elements to be rotated
+        List<int> rotatedElements = data.GetRange(data.Count - effectiveAmount, effectiveAmount);
+
+        // Rotate the list
+        data.RemoveRange(data.Count - effectiveAmount, effectiveAmount);
+        data.InsertRange(0, rotatedElements);
+
 
     }
 }
