@@ -54,6 +54,7 @@
         {  
             Console.WriteLine(ex.ToString()); //suggest by vscode
         }
-
+        // Defect(s) Found: This doesn't exactly show an error message
+        // but it does notice that the queue is empty and shows no other result.
     }
 }
