@@ -30,6 +30,14 @@ public class Maze {
     /// </summary>
     public void MoveLeft() {
         // FILL IN CODE
+        int newX = _currX - 1;
+        int newY = _currY;
+        if(_mazeMap.TryGetValue((newX, newY), out bool[] validMoves) && validMoves[0]) {
+            _currX = newX;
+            _currY = newY;
+        } else {
+            Console.WriteLine("Can't go left");
+        }
     }
 
     /// <summary>
@@ -38,6 +46,14 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+        int newX = _currX + 1;
+        int newY = _currY;
+        if(_mazeMap.TryGetValue((newX, newY), out bool[] validMoves) && validMoves[1]) {
+            _currX = newX;
+            _currY = newY;
+        } else {
+            Console.WriteLine("Can't go right");
+        }
     }
 
     /// <summary>
@@ -46,6 +62,14 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        int newX = _currX;
+        int newY = _currY - 1;
+        if(_mazeMap.TryGetValue((newX, newY), out bool[] validMoves) && validMoves[2]) {
+            _currX = newX;
+            _currY = newY;
+        } else {
+            Console.WriteLine("Can't go up");
+        }
     }
 
     /// <summary>
@@ -54,6 +78,14 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+        int newX = _currX;
+        int newY = _currY + 1;
+        if(_mazeMap.TryGetValue((newX, newY), out bool[] validMoves) && validMoves[3]) {
+            _currX = newX;
+            _currY = newY;
+        } else {
+            Console.WriteLine("Can't go down");
+        }
     }
 
     public void ShowStatus() {

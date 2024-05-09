@@ -107,10 +107,18 @@ public static class SetsAndMapsTester {
     /// that there were no duplicates) and therefore should not be displayed.
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
-    private static void DisplayPairs(string[] words) {
+    private static void DisplayPairs(string[] words) { // PROBLEM 1 SOLUTION CODE // PRIVATE METHOD THAT RECIEVES words AS INPUT TO FIND PAIRS
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        HashSet<string> wordSet = new HashSet<string>();
+        foreach (string word in words) {
+            string pair = new string(new[] {word[1], word[0] });
+            if (wordSet.Contains(pair) && word != pair) {
+                Console.WriteLine($"{word} & {pair}");
+            }
+            wordSet.Add(word);
+        }
     }
 
     /// <summary>
@@ -127,11 +135,17 @@ public static class SetsAndMapsTester {
     /// #############
     /// # Problem 2 #
     /// #############
+
     private static Dictionary<string, int> SummarizeDegrees(string filename) {
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
-            // Todo Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3].Trim();
+            if (degrees.ContainsKey(degree)) { // if degree is in degree dictionary, increments counts
+                degrees[degree]++;
+            } else {
+                degrees[degree] = 1; // if not, add the degree to the dictionary with count 1
+            }
         }
 
         return degrees;
@@ -158,7 +172,41 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = word1.ToLower();
+        word2 = word2.ToLower();
+
+        // Dictionaries to store character counts
+        var charCount1 = new Dictionary<char, int>();
+        var charCount2 = new Dictionary<char, int>();
+
+        //
+        foreach (char c in word1) {
+            if (c != ' ') {
+                if (charCount1.ContainsKey(c)) {
+                    charCount1[c]++;
+                } else {
+                    charCount1[c] = 1;
+                }
+            }
+        }
+        foreach (char c in word2) {
+            if (c != ' ') {
+                if (charCount2.ContainsKey(c)) {
+                    charCount2[c]++;
+                } else {
+                    charCount2[c] = 1;
+                }
+            }
+        }
+        foreach (var pair in charCount1) {
+            char c = pair.Key;
+            int count1 = pair.Value;
+            int count2;
+            if (!charCount2.TryGetValue(c, out count2) || count1 != count2) {
+                return false;
+            }
+        }
+        return true; // confirmation of anagrams
     }
 
     /// <summary>
