@@ -147,7 +147,12 @@ public static class RecursionTester {
     /// </summary>
     public static int SumSquaresRecursive(int n) {
         // TODO Start Problem 1
-        return 0;
+        if (n <= 0)
+        {
+            return 0;
+        }
+        // Recursive case
+        return n * n + SumSquaresRecursive(n - 1);
     }
 
     /// <summary>
@@ -171,6 +176,16 @@ public static class RecursionTester {
     /// </summary>
     public static void PermutationsChoose(string letters, int size, string word = "") {
         // TODO Start Problem 2
+        if (word.Length == size)
+        {
+            Console.WriteLine(word);
+            return;
+        }
+        foreach (char letter in letters) {
+            if (!word.Contains(letter)) {
+                PermutationsChoose(letters, size, word + letter);
+            }
+        }
     }
 
     /// <summary>
@@ -219,6 +234,9 @@ public static class RecursionTester {
     /// until the memoization is implemented.
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null) {
+        if (remember == null)
+            remember = new Dictionary<int, decimal>();
+        
         // Base Cases
         if (s == 0)
             return 0;
@@ -228,6 +246,9 @@ public static class RecursionTester {
             return 2;
         if (s == 3)
             return 4;
+
+        if (remember.ContainsKey(s))
+            return remember[s];
 
         // Solve using recursion
         decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
@@ -249,8 +270,24 @@ public static class RecursionTester {
     /// </summary>
     public static void WildcardBinary(string pattern) {
         // TODO Start Problem 4
+        GenerateBinaryStrings(pattern, 0, "");
     }
-
+    private static void GenerateBinaryStrings(string pattern, int index, string current) {
+    // Base case: if all characters in the pattern are processed
+    if (index == pattern.Length) {
+        Console.WriteLine(current);
+        return;
+    }
+    // If the current character is not a wildcard
+    if (pattern[index] != '*') {
+        // Simply append the character and move to the next index
+        GenerateBinaryStrings(pattern, index + 1, current + pattern[index]);
+    } else {
+        // If the current character is a wildcard, try both '0' and '1'
+        GenerateBinaryStrings(pattern, index + 1, current + '0');
+        GenerateBinaryStrings(pattern, index + 1, current + '1');
+    }
+}
     /// <summary>
     /// Use recursion to Print all paths that start at (0,0) and end at the
     /// 'end' square.
